@@ -42,9 +42,7 @@ public class PolicyHandler{
 
     {{#incoming "Event" .}}
     @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='{{namePascalCase}}'")
-    public void whenever{{namePascalCase}}_{{../namePascalCase}}(@Payload {{namePascalCase}} {{nameCamelCase}}, 
-                                @Header(KafkaHeaders.ACKNOWLEDGMENT) Acknowledgment acknowledgment,
-                                @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) byte[] messageKey){
+    public void whenever{{namePascalCase}}_{{../namePascalCase}}(@Payload {{namePascalCase}} {{nameCamelCase}}){
 
         {{namePascalCase}} event = {{nameCamelCase}};
         System.out.println("\n\n##### listener {{../namePascalCase}} : " + {{nameCamelCase}} + "\n\n");
@@ -72,9 +70,6 @@ public class PolicyHandler{
 
 
         {{#todo ../description}}{{/todo}}
-
-        // Manual Offset Commit //
-        acknowledgment.acknowledge();
 
     }
     {{/incoming}}

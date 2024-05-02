@@ -84,8 +84,8 @@ public class {{namePascalCase}}Controller {
         return {{#aggregate}}{{nameCamelCase}}{{/aggregate}}Service.{{nameCamelCase}}({{nameCamelCase}}Command);
 
     }
-    {{/if}}
     {{/checkMethod}} 
+    {{/if}}
     {{/if}}
     {{/commands}}
     {{/if}}
