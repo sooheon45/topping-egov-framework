@@ -1,0 +1,7 @@
+name: Egov-framework
+rating: 5
+imageUrl: https://github.com/msa-ez/template-spring-boot-egov/assets/123912988/67e70243-8377-47ac-85aa-961db52a3c31
+description: Framework that allows for the rapid and easy development of web applications in accordance with the e-Government standard framework format.
+depends:
+tags:
+  - Backend
