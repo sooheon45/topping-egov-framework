@@ -90,7 +90,7 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
             {{../namePascalCase}} {{../nameCamelCase}} = optional{{../namePascalCase}}.get();
             
             // business Logic....
-            {{../namePascalCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
+            {{../nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
             {{../nameCamelCase}}Repository.save({{../nameCamelCase}});
 
             return {{../nameCamelCase}};

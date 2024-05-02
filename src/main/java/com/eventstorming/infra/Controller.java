@@ -58,6 +58,8 @@ public class {{namePascalCase}}Controller {
     {{#if commands}}
     {{#commands}}
     {{#if isExtendedVerb}}
+    {{#if incomingRelations}}
+    {{else}}
     {{#checkMethod controllerInfo.method}}
     @RequestMapping(value = "/{{#aggregate}}{{namePlural}}{{/aggregate}}/{id}/{{#if controllerInfo.apiPath}}{{controllerInfo.apiPath}}{{else}}{{#changeLowerCase nameCamelCase}}{{/changeLowerCase}}{{/if}}", method = RequestMethod.{{#controllerInfo}}{{method}}{{/controllerInfo}}, produces = "application/json;charset=UTF-8")
     public {{#aggregate}}{{namePascalCase}}{{/aggregate}} {{nameCamelCase}}(        
@@ -82,6 +84,7 @@ public class {{namePascalCase}}Controller {
         return {{#aggregate}}{{nameCamelCase}}{{/aggregate}}Service.{{nameCamelCase}}({{nameCamelCase}}Command);
 
     }
+    {{/if}}
     {{/checkMethod}} 
     {{/if}}
     {{/commands}}
