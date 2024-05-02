@@ -27,28 +27,28 @@ ifDuplicated: merge
         <!-- egov -->
 		<dependency>
 		    <groupId>org.egovframe.rte</groupId>
-		    <artifactId>org.egovframe.rte.ptl.mvc</artifactId>
+		    <artifactId iskey="true">org.egovframe.rte.ptl.mvc</artifactId>
 		    <version>${org.egovframe.rte.version}</version>
 		    <exclusions>
 		    	<exclusion>
-		    		<artifactId>commons-logging</artifactId>
+		    		<artifactId iskey="true">commons-logging</artifactId>
 		    		<groupId>commons-logging</groupId>
 		    	</exclusion>
 		    </exclusions>
         </dependency>
         <dependency>
 		    <groupId>org.egovframe.rte</groupId>
-		    <artifactId>org.egovframe.rte.psl.dataaccess</artifactId>
+		    <artifactId iskey="true">org.egovframe.rte.psl.dataaccess</artifactId>
 		    <version>${org.egovframe.rte.version}</version>
         </dependency>
         <dependency>
 			<groupId>org.egovframe.rte</groupId>
-			<artifactId>org.egovframe.rte.fdl.idgnr</artifactId>
+			<artifactId iskey="true">org.egovframe.rte.fdl.idgnr</artifactId>
 			<version>${org.egovframe.rte.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.egovframe.rte</groupId>
-			<artifactId>org.egovframe.rte.fdl.property</artifactId>
+			<artifactId iskey="true">org.egovframe.rte.fdl.property</artifactId>
 			<version>${org.egovframe.rte.version}</version>
 		</dependency>
 	</dependencies>
