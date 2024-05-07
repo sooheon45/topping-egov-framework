@@ -27,14 +27,6 @@ public interface {{namePascalCase}}Service {
     {{/if}}
     {{/commands}}
     {{/if}}
-    
-    {{#boundedContext}}
-    {{#policies}}
-    {{#if outgoingCommandInfo}}
-    {{#../aggregates}}{{namePascalCase}}{{/../aggregates}} {{#outgoingCommandInfo}}{{commandValue.nameCamelCase}}({{commandValue.namePascalCase}}Command {{commandValue.nameCamelCase}}Command){{/outgoingCommandInfo}} throws Exception;
-    {{/if}}
-    {{/policies}}
-    {{/boundedContext}}
 }
 
 <function>
