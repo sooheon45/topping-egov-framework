@@ -51,7 +51,7 @@ public class PolicyHandler{
         {{namePascalCase}}.{{../../nameCamelCase}}(event);        
         {{/../aggregateList}}
 
-        {{#attachedOrOutgoing "Command" ..}}
+        {{#outgoing "Command" ..}}
         {{#isExtendedVerb}}
         {{namePascalCase}}Command {{nameCamelCase}}Command = new {{namePascalCase}}Command();
         // implement:  Map command properties from event
@@ -66,7 +66,7 @@ public class PolicyHandler{
         {{aggregate.namePascalCase}} {{aggregate.nameCamelCase}} = new {{aggregate.namePascalCase}}();
         {{aggregate.nameCamelCase}}Repository.save({{aggregate.nameCamelCase}});
         {{/isExtendedVerb}}
-        {{/attachedOrOutgoing}}
+        {{/outgoing}}
 
 
         {{#todo ../description}}{{/todo}}
