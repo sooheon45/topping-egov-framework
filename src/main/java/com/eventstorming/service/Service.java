@@ -20,7 +20,10 @@ public interface {{namePascalCase}}Service {
     {{#if commands}}
     {{#commands}}
     {{#if isExtendedVerb}}
+    {{#if incomingRelations}}
+    {{else}}
     {{#aggregate}}{{namePascalCase}}{{/aggregate}} {{nameCamelCase}}({{namePascalCase}}Command {{nameCamelCase}}Command) throws Exception;
+    {{/if}}
     {{/if}}
     {{/commands}}
     {{/if}}

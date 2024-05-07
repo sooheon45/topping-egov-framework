@@ -72,6 +72,8 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
     {{#if commands}}
     {{#commands}}
     {{#if isExtendedVerb}}
+    {{#if incomingRelations}}
+    {{else}}
     @Override
 	public {{../namePascalCase}} {{nameCamelCase}}({{namePascalCase}}Command {{nameCamelCase}}Command) throws Exception {        
 
@@ -98,6 +100,7 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
             throw processException("info.nodata.msg");
         }
     }
+    {{/if}}
     {{/if}}
     {{/commands}}
     {{/if}}
