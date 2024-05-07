@@ -7,7 +7,9 @@ import javax.naming.NameParser;
 
 import javax.naming.NameParser;
 import javax.transaction.Transactional;
+import egovk.service.{{#aggregates}}{{namePascalCase}}{{/aggregates}}Service;
 
+import javax.annotation.Resource;
 import {{options.package}}.config.kafka.KafkaProcessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
