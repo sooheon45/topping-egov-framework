@@ -7,9 +7,7 @@ import javax.naming.NameParser;
 
 import javax.naming.NameParser;
 import javax.transaction.Transactional;
-import egovk.service.{{#aggregates}}{{namePascalCase}}{{/aggregates}}Service;
 
-import javax.annotation.Resource;
 import {{options.package}}.config.kafka.KafkaProcessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,11 +25,6 @@ public class PolicyHandler{
     @Autowired {{namePascalCase}}Repository {{nameCamelCase}}Repository;
     {{/aggregates}}
 
-    {{#aggregates}}
-    @Resource(name = "{{nameCamelCase}}Service")
-    private {{namePascalCase}}Service {{nameCamelCase}}Service;
-    {{/aggregates}}
-    
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString){}
 
@@ -58,12 +51,12 @@ public class PolicyHandler{
         {{namePascalCase}}Command {{nameCamelCase}}Command = new {{namePascalCase}}Command();
         // implement:  Map command properties from event
 
-        {{aggregate.nameCamelCase}}Repository.findById(
+        // {{aggregate.nameCamelCase}}Repository.findById(
                 // implement: Set the {{aggregate.namePascalCase}} Id from one of {{../namePascalCase}} event's corresponding property
                 
-            ).ifPresent({{aggregate.nameCamelCase}}->{
-             {{aggregate.nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command); 
-        });
+            // ).ifPresent({{aggregate.nameCamelCase}}->{
+            //  {{aggregate.nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command); 
+        // });
         {{else}}
         {{aggregate.namePascalCase}} {{aggregate.nameCamelCase}} = new {{aggregate.namePascalCase}}();
         {{aggregate.nameCamelCase}}Repository.save({{aggregate.nameCamelCase}});
