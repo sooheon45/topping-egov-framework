@@ -43,13 +43,13 @@ public class {{namePascalCase}}Controller {
         return {{nameCamelCase}}Service.create{{namePascalCase}}({{nameCamelCase}});
     }
 
-    @PutMapping("/{{namePlural}}/{id}")
+    @PutMapping("/{{namePlural}}/{{#wrapWithBracesKeyField nameCamelCase}}{{/wrapWithBracesKeyField}}{{/keyFieldDescriptor}}")
     public {{namePascalCase}} update{{namePascalCase}}(@PathVariable {{#keyFieldDescriptor}}{{className}} {{nameCamelCase}}{{/keyFieldDescriptor}}, @RequestBody {{namePascalCase}} {{nameCamelCase}}) throws Exception {
         // Update an existing {{nameCamelCase}} via {{namePascalCase}}Service
         return {{nameCamelCase}}Service.update{{namePascalCase}}({{nameCamelCase}});
     }
 
-    @DeleteMapping("/{{namePlural}}/{id}")
+    @DeleteMapping("/{{namePlural}}/{{#wrapWithBracesKeyField nameCamelCase}}{{/wrapWithBracesKeyField}}{{/keyFieldDescriptor}}")
     public void delete{{namePascalCase}}(@PathVariable {{#keyFieldDescriptor}}{{className}} {{nameCamelCase}}{{/keyFieldDescriptor}}) throws Exception {
         // Delete a {{nameCamelCase}} via {{namePascalCase}}Service
         {{nameCamelCase}}Service.delete{{namePascalCase}}({{#keyFieldDescriptor}}{{nameCamelCase}}{{/keyFieldDescriptor}});
