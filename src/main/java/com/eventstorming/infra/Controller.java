@@ -31,7 +31,7 @@ public class {{namePascalCase}}Controller {
         return {{nameCamelCase}}Service.getAll{{#changeFirstStr namePlural}}{{/changeFirstStr}}();
     }
 
-    @GetMapping("/{{namePlural}}/{id}")
+    @GetMapping("/{{namePlural}}/{{#keyFieldDescriptor}}{{#wrapWithBracesKeyField nameCamelCase}}{{/wrapWithBracesKeyField}}{{/keyFieldDescriptor}}")
     public Optional<{{namePascalCase}}> get{{namePascalCase}}ById(@PathVariable {{#keyFieldDescriptor}}{{className}} {{nameCamelCase}}{{/keyFieldDescriptor}}) throws Exception {
         // Get a {{nameCamelCase}} by ID via {{namePascalCase}}Service
         return {{nameCamelCase}}Service.get{{namePascalCase}}ById({{#keyFieldDescriptor}}{{nameCamelCase}}{{/keyFieldDescriptor}});
