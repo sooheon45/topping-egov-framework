@@ -49,25 +49,8 @@ public class PolicyHandler{
         {{#outgoing "Command" ..}}
         {{#isExtendedVerb}}
         {{namePascalCase}}Command {{nameCamelCase}}Command = new {{namePascalCase}}Command();
-
-        {{#checkMethod controllerInfo.method}}
-        // {{aggregate.nameCamelCase}}Repository.findById(
-                // implement: Set the {{aggregate.namePascalCase}} Id from one of {{../namePascalCase}} event's corresponding property
-                
-            // ).ifPresent({{aggregate.nameCamelCase}}->{
-            //  {{aggregate.nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command); 
-            // {{aggregate.nameCamelCase}}Repository.save({{aggregate.nameCamelCase}});
-        // });
-        {{/checkMethod}}
-        {{^checkMethod controllerInfo.method}}
         // implement:  Map command properties from event
         // {{nameCamelCase}}Command.set??(event.get??());
-
-        // {{aggregate.namePascalCase}} {{aggregate.nameCamelCase}} = new {{aggregate.namePascalCase}}();
-        // {{aggregate.nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
-        // {{aggregate.nameCamelCase}}Repository.save({{aggregate.nameCamelCase}});
-        {{/checkMethod}}
-        // implement:  Map command properties from event
 
         // {{aggregate.nameCamelCase}}Repository.findById(
                 // implement: Set the {{aggregate.namePascalCase}} Id from one of {{../namePascalCase}} event's corresponding property
@@ -101,13 +84,5 @@ public class PolicyHandler{
             return description = '// Comments // \n\t\t//' + description;
         }
         return null;
-    });
-
-    window.$HandleBars.registerHelper('checkMethod', function (method, options) {
-        if(method.endsWith("PUT") || method.endsWith("DELETE")){
-            return options.fn(this);
-        } else {
-            return options.inverse(this);
-        }
     });
 </function>
