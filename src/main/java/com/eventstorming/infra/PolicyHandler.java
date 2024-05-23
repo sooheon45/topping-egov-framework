@@ -50,7 +50,7 @@ public class PolicyHandler{
         {{#isExtendedVerb}}
         {{namePascalCase}}Command {{nameCamelCase}}Command = new {{namePascalCase}}Command();
 
-        {{#checkMethod controllerInfo}}
+        {{#checkMethod controllerInfo.method}}
         // {{aggregate.nameCamelCase}}Repository.findById(
                 // implement: Set the {{aggregate.namePascalCase}} Id from one of {{../namePascalCase}} event's corresponding property
                 
