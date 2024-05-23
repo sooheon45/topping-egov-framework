@@ -104,6 +104,7 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
     {{/checkIncomingType}}
     {{/incomingRelations}}
     {{else}}
+    {{#checkMethod controllerInfo.method}} // PUT
     @Override
 	public {{../namePascalCase}} {{nameCamelCase}}({{namePascalCase}}Command {{nameCamelCase}}Command) throws Exception {        
 
@@ -130,6 +131,33 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
             throw processException("info.nodata.msg");
         }
     }
+    {{/checkMethod}}
+    {{^checkMethod controllerInfo.method}} //POST
+    @Override
+	public {{../namePascalCase}} {{nameCamelCase}}({{namePascalCase}}Command {{nameCamelCase}}Command) throws Exception {        
+
+        // You can implement logic here, or call the domain method of the {{#aggregate}}{{namePascalCase}}{{/aggregate}}.
+        {{../namePascalCase}} {{../nameCamelCase}} = new {{../namePascalCase}}();
+        {{../nameCamelCase}}.setUserId(event.getUserId());
+
+        {{../nameCamelCase}}Repository.save({{../nameCamelCase}});   
+        /** Option 1-1:  implement logic here 
+        Optional<{{../namePascalCase}}> optional{{../namePascalCase}} = {{../nameCamelCase}}Repository.findById({{nameCamelCase}}Command.get{{../namePascalCase}}Id());
+
+        if (optional{{../namePascalCase}}.isPresent()) {
+            {{../namePascalCase}} {{../nameCamelCase}} = optional{{../namePascalCase}}.get();
+            
+            // business Logic....
+            {{../nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
+            {{../nameCamelCase}}Repository.save({{../nameCamelCase}});
+
+            return {{../nameCamelCase}};
+        } else {
+            throw processException("info.nodata.msg");
+        }
+        */
+    }
+    {{/checkMethod}} 
     {{/if}}
     {{/if}}
     {{/commands}}
