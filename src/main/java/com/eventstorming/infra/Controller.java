@@ -4,8 +4,8 @@ fileName: {{namePascalCase}}Controller.java
 path: {{boundedContext.name}}/{{{options.packagePath}}}/infra
 ---
 package {{options.package}}.infra;
-import java.util.Optional;
 
+import java.util.Optional;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -13,18 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
 import {{options.package}}.domain.*;
 import {{options.package}}.service.*;
 
 @RestController
 // @RequestMapping(value="/{{namePlural}}")
 public class {{namePascalCase}}Controller {
-
     @Resource(name = "{{nameCamelCase}}Service")
-	private {{namePascalCase}}Service {{nameCamelCase}}Service;
-
+    private {{namePascalCase}}Service {{nameCamelCase}}Service;
+    
     @GetMapping("/{{namePlural}}")
     public List<{{namePascalCase}}> getAll{{#changeFirstStr namePlural}}{{/changeFirstStr}}() throws Exception {
         // Get all {{namePlural}} via {{namePascalCase}}Service
@@ -54,13 +51,27 @@ public class {{namePascalCase}}Controller {
         // Delete a {{nameCamelCase}} via {{namePascalCase}}Service
         {{nameCamelCase}}Service.delete{{namePascalCase}}({{#keyFieldDescriptor}}{{nameCamelCase}}{{/keyFieldDescriptor}});
     }
-
     {{#if commands}}
     {{#commands}}
     {{#if isExtendedVerb}}
     {{#if incomingRelations}}
+    {{#incomingRelations}}
+    {{#checkIncomingType source._type}}
+
+    @RequestMapping(value = "/{{#../aggregate}}{{namePlural}}/{{#keyFieldDescriptor}}{{#wrapWithBracesKeyField nameCamelCase}}{{/wrapWithBracesKeyField}}{{/keyFieldDescriptor}}{{/../aggregate}}/{{#if ../controllerInfo.apiPath}}{{../controllerInfo.apiPath}}{{else}}{{#changeLowerCase ../nameCamelCase}}{{/changeLowerCase}}{{/if}}", method = RequestMethod.{{#../controllerInfo}}{{method}}{{/../controllerInfo}}, produces = "application/json;charset=UTF-8")
+    public {{#../aggregate}}{{namePascalCase}}{{/../aggregate}} {{../nameCamelCase}}(        
+        @PathVariable(value = "id") {{../../keyFieldDescriptor.className}} {{../../keyFieldDescriptor.nameCamelCase}},
+        @RequestBody {{../namePascalCase}}Command {{../nameCamelCase}}Command,
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) throws Exception {
+        return {{#../aggregate}}{{nameCamelCase}}{{/../aggregate}}Service.{{../nameCamelCase}}({{../nameCamelCase}}Command);
+    }
+    {{/checkIncomingType}}
+    {{/incomingRelations}}
     {{else}}
     {{#checkMethod controllerInfo.method}}
+
     @RequestMapping(value = "/{{#aggregate}}{{namePlural}}{{/aggregate}}/{{#aggregate}}{{#keyFieldDescriptor}}{{#wrapWithBracesKeyField nameCamelCase}}{{/wrapWithBracesKeyField}}{{/keyFieldDescriptor}}{{/aggregate}}/{{#if controllerInfo.apiPath}}{{controllerInfo.apiPath}}{{else}}{{#changeLowerCase nameCamelCase}}{{/changeLowerCase}}{{/if}}", method = RequestMethod.{{#controllerInfo}}{{method}}{{/controllerInfo}}, produces = "application/json;charset=UTF-8")
     public {{#aggregate}}{{namePascalCase}}{{/aggregate}} {{nameCamelCase}}(        
         @PathVariable(value = "id") {{../keyFieldDescriptor.className}} {{../keyFieldDescriptor.nameCamelCase}},
@@ -68,21 +79,18 @@ public class {{namePascalCase}}Controller {
         HttpServletRequest request,
         HttpServletResponse response
     ) throws Exception {
-
         return {{#aggregate}}{{nameCamelCase}}{{/aggregate}}Service.{{nameCamelCase}}({{nameCamelCase}}Command);
-
     }
     {{/checkMethod}}
     {{^checkMethod controllerInfo.method}}
+
     @RequestMapping(value = "{{#aggregate}}{{namePlural}}{{/aggregate}}", method = RequestMethod.{{#controllerInfo}}{{method}}{{/controllerInfo}}, produces = "application/json;charset=UTF-8")
     public {{#aggregate}}{{namePascalCase}}{{/aggregate}} {{nameCamelCase}}(        
         @RequestBody {{namePascalCase}}Command {{nameCamelCase}}Command,
         HttpServletRequest request,
         HttpServletResponse response
     ) throws Exception {
-
         return {{#aggregate}}{{nameCamelCase}}{{/aggregate}}Service.{{nameCamelCase}}({{nameCamelCase}}Command);
-
     }
     {{/checkMethod}} 
     {{/if}}
@@ -92,6 +100,14 @@ public class {{namePascalCase}}Controller {
 }
 
 <function>
+window.$HandleBars.registerHelper('checkIncomingType', function (incomingType, options) {
+    if (incomingType.endsWith("Event")) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
 window.$HandleBars.registerHelper('changeLowerCase', function (str) {
     if (str) {
         return str.toLowerCase();
@@ -193,7 +209,7 @@ window.$HandleBars.registerHelper('isPOST', function (method, options) {
         return options.inverse(this);
     }
 });
-    
+
 window.$HandleBars.registerHelper('isDelete', function (method, options) {
     if(method.endsWith("DELETE")){
         return options.fn(this);
@@ -203,9 +219,7 @@ window.$HandleBars.registerHelper('isDelete', function (method, options) {
 });
 
 window.$HandleBars.registerHelper('toURL', function (className) {
-
     var pluralize = function(value, revert){
-
         var plural = {
             '(quiz)$'               : "$1zes",
             '^(ox)$'                : "$1en",
@@ -226,7 +240,6 @@ window.$HandleBars.registerHelper('toURL', function (className) {
             '(us)$'                 : "$1es",
             '([^s]+)$'              : "$1s"
         };
-
         var singular = {
             '(quiz)zes$'             : "$1",
             '(matr)ices$'            : "$1ix",
@@ -257,7 +270,6 @@ window.$HandleBars.registerHelper('toURL', function (className) {
             '(us)es$'                : "$1",
             's$'                     : ""
         };
-
         var irregular = {
             'move'   : 'moves',
             'foot'   : 'feet',
@@ -269,7 +281,6 @@ window.$HandleBars.registerHelper('toURL', function (className) {
             'person' : 'people',
             'index'  : 'indexes'
         };
-
         var uncountable = [
             'sheep',
             'fish',
@@ -282,15 +293,12 @@ window.$HandleBars.registerHelper('toURL', function (className) {
             'information',
             'equipment'
         ];
-
         // save some time in the case that singular and plural are the same
         // console.log("value = " + value)
         if(uncountable.indexOf(value.toLowerCase()) >= 0)
         return this;
-
         // check for irregular forms
         for(var word in irregular){
-
             if(revert) {
                 var pattern = new RegExp(irregular[word]+'$', 'i');
                 var replace = word;
@@ -301,22 +309,15 @@ window.$HandleBars.registerHelper('toURL', function (className) {
             if(pattern.test(value))
                 return value.replace(pattern, replace);
         }
-
         if(revert) var array = singular;
             else  var array = plural;
-
-        // check for matches using regular expressions
         for(var reg in array) {
-
             var pattern = new RegExp(reg, 'i');
-
             if(pattern.test(value))
                 return value.replace(pattern, array[reg]);
         }
-
         return value;
     }
-
     return pluralize(className.toLowerCase())
 })
 </function>
