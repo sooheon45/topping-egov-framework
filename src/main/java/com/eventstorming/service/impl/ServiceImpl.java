@@ -99,7 +99,7 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
     {{/checkIncomingType}}
     {{/incomingRelations}}
     {{else}}
-    {{#checkMethod controllerInfo.method}} // PUT
+    {{#checkMethod controllerInfo.method}}
     @Override
 	public {{../namePascalCase}} {{nameCamelCase}}({{namePascalCase}}Command {{nameCamelCase}}Command) throws Exception {        
 
@@ -122,7 +122,7 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
         }
     }
     {{/checkMethod}}
-    {{^checkMethod controllerInfo.method}} //POST
+    {{^checkMethod controllerInfo.method}}
     @Override
 	public {{../namePascalCase}} {{nameCamelCase}}({{namePascalCase}}Command {{nameCamelCase}}Command) throws Exception {        
 
