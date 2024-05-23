@@ -81,22 +81,17 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
         // You can implement logic here, or call the domain method of the {{#../aggregate}}{{namePascalCase}}{{/../aggregate}}.
         
         /** Option 1-1:  implement logic here     
-            {{../../namePascalCase}} {{../../nameCamelCase}} = new {{../../namePascalCase}}();
-            {{../../nameCamelCase}}.setUserId(event.getUserId());
-
-            {{../../nameCamelCase}}Repository.save({{../../nameCamelCase}});   
+            {{../namePascalCase}} {{../nameCamelCase}} = new {{../namePascalCase}}();
+            {{../nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
+            {{../nameCamelCase}}Repository.save({{../nameCamelCase}});     
         */
         
         Optional<{{../../namePascalCase}}> optional{{../../namePascalCase}} = {{../../nameCamelCase}}Repository.findById({{../nameCamelCase}}Command.get{{../../namePascalCase}}Id());
 
         if (optional{{../../namePascalCase}}.isPresent()) {
-            {{../../namePascalCase}} {{../../nameCamelCase}} = optional{{../../namePascalCase}}.get();
-            
-            // business Logic....
-            {{../../nameCamelCase}}.{{../nameCamelCase}}({{../nameCamelCase}}Command);
-            {{../../nameCamelCase}}Repository.save({{../../nameCamelCase}});
-
-            return {{../../nameCamelCase}};
+            {{../namePascalCase}} {{../nameCamelCase}} = optional{{../namePascalCase}}.get();
+            {{../nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
+            return {{../nameCamelCase}}Repository.save({{../nameCamelCase}});
         } else {
             throw processException("info.nodata.msg");
         }
@@ -112,8 +107,7 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
         
         /** Option 1-1:  implement logic here     
             {{../namePascalCase}} {{../nameCamelCase}} = new {{../namePascalCase}}();
-            {{../nameCamelCase}}.setUserId(event.getUserId());
-
+            {{../nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
             {{../nameCamelCase}}Repository.save({{../nameCamelCase}});   
         */
         
@@ -121,12 +115,8 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
 
         if (optional{{../namePascalCase}}.isPresent()) {
             {{../namePascalCase}} {{../nameCamelCase}} = optional{{../namePascalCase}}.get();
-            
-            // business Logic....
             {{../nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
-            {{../nameCamelCase}}Repository.save({{../nameCamelCase}});
-
-            return {{../nameCamelCase}};
+            return {{../nameCamelCase}}Repository.save({{../nameCamelCase}});
         } else {
             throw processException("info.nodata.msg");
         }
@@ -138,20 +128,15 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
 
         // You can implement logic here, or call the domain method of the {{#aggregate}}{{namePascalCase}}{{/aggregate}}.
         {{../namePascalCase}} {{../nameCamelCase}} = new {{../namePascalCase}}();
-        {{../nameCamelCase}}.setUserId(event.getUserId());
-
+        {{../nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
         {{../nameCamelCase}}Repository.save({{../nameCamelCase}});   
         /** Option 1-1:  implement logic here 
         Optional<{{../namePascalCase}}> optional{{../namePascalCase}} = {{../nameCamelCase}}Repository.findById({{nameCamelCase}}Command.get{{../namePascalCase}}Id());
 
         if (optional{{../namePascalCase}}.isPresent()) {
             {{../namePascalCase}} {{../nameCamelCase}} = optional{{../namePascalCase}}.get();
-            
-            // business Logic....
             {{../nameCamelCase}}.{{nameCamelCase}}({{nameCamelCase}}Command);
-            {{../nameCamelCase}}Repository.save({{../nameCamelCase}});
-
-            return {{../nameCamelCase}};
+            return {{../nameCamelCase}}Repository.save({{../nameCamelCase}});
         } else {
             throw processException("info.nodata.msg");
         }
