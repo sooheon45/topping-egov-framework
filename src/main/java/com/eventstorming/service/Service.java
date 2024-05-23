@@ -21,9 +21,11 @@ public interface {{namePascalCase}}Service {
     {{#commands}}
     {{#if isExtendedVerb}}
     {{#if incomingRelations}}
+    {{#incomingRelations}}
     {{#checkIncomingType source._type}}
     {{#../aggregate}}{{namePascalCase}}{{/../aggregate}} {{../nameCamelCase}}({{../namePascalCase}}Command {{../nameCamelCase}}Command) throws Exception;
     {{/checkIncomingType}}
+    {{/incomingRelations}}
     {{else}}
     {{#aggregate}}{{namePascalCase}}{{/aggregate}} {{nameCamelCase}}({{namePascalCase}}Command {{nameCamelCase}}Command) throws Exception;
     {{/if}}
@@ -33,14 +35,6 @@ public interface {{namePascalCase}}Service {
 }
 
 <function>
-    window.$HandleBars.registerHelper('checkIncomingType', function (incomingType, options) {
-        if (incomingType.endsWith("Event")) {
-            return options.fn(this);
-        } else {
-            return options.inverse(this);
-        }
-    });
-
     window.$HandleBars.registerHelper('wrapWithBracesKeyField', function (keyField) {
         if (keyField) {
             return `{${keyField}}`;
@@ -57,6 +51,14 @@ public interface {{namePascalCase}}Service {
 
     window.$HandleBars.registerHelper('checkMethod', function (method, options) {
         if(method.endsWith("PUT") || method.endsWith("DELETE")){
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    });
+
+    window.$HandleBars.registerHelper('checkIncomingType', function (incomingType, options) {
+        if (incomingType.endsWith("Event")) {
             return options.fn(this);
         } else {
             return options.inverse(this);

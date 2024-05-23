@@ -73,6 +73,7 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
     {{#commands}}
     {{#if isExtendedVerb}}
     {{#if incomingRelations}}
+    {{#incomingRelations}}
     {{#checkIncomingType source._type}}
     @Override
 	public {{../../namePascalCase}} {{../nameCamelCase}}({{../namePascalCase}}Command {{../nameCamelCase}}Command) throws Exception {        
@@ -101,6 +102,7 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
         }
     }
     {{/checkIncomingType}}
+    {{/incomingRelations}}
     {{else}}
     @Override
 	public {{../namePascalCase}} {{nameCamelCase}}({{namePascalCase}}Command {{nameCamelCase}}Command) throws Exception {        
