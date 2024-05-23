@@ -73,6 +73,34 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
     {{#commands}}
     {{#if isExtendedVerb}}
     {{#if incomingRelations}}
+    {{#checkIncomingType source._type}}
+    @Override
+	public {{../../namePascalCase}} {{../nameCamelCase}}({{../namePascalCase}}Command {{../nameCamelCase}}Command) throws Exception {        
+
+        // You can implement logic here, or call the domain method of the {{#../aggregate}}{{namePascalCase}}{{/../aggregate}}.
+        
+        /** Option 1-1:  implement logic here     
+            {{../../namePascalCase}} {{../../nameCamelCase}} = new {{../../namePascalCase}}();
+            {{../../nameCamelCase}}.setUserId(event.getUserId());
+
+            {{../../nameCamelCase}}Repository.save({{../../nameCamelCase}});   
+        */
+        
+        Optional<{{../../namePascalCase}}> optional{{../../namePascalCase}} = {{../../nameCamelCase}}Repository.findById({{../nameCamelCase}}Command.get{{../../namePascalCase}}Id());
+
+        if (optional{{../../namePascalCase}}.isPresent()) {
+            {{../../namePascalCase}} {{../../nameCamelCase}} = optional{{../../namePascalCase}}.get();
+            
+            // business Logic....
+            {{../../nameCamelCase}}.{{../nameCamelCase}}({{../nameCamelCase}}Command);
+            {{../../nameCamelCase}}Repository.save({{../../nameCamelCase}});
+
+            return {{../../nameCamelCase}};
+        } else {
+            throw processException("info.nodata.msg");
+        }
+    }
+    {{/checkIncomingType}}
     {{else}}
     @Override
 	public {{../namePascalCase}} {{nameCamelCase}}({{namePascalCase}}Command {{nameCamelCase}}Command) throws Exception {        
@@ -107,6 +135,13 @@ public class {{namePascalCase}}ServiceImpl extends EgovAbstractServiceImpl imple
 }
 
 <function>
+    window.$HandleBars.registerHelper('checkIncomingType', function (incomingType, options) {
+        if (incomingType.endsWith("Event")) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    });
     window.$HandleBars.registerHelper('wrapWithBracesKeyField', function (keyField) {
         if (keyField) {
             return `{${keyField}}`;
