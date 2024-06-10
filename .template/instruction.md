@@ -6,6 +6,6 @@
 ### How to run
 
 ```
-cd microservice
+cd <microservice>
 mvn spring-boot:run
 ```
