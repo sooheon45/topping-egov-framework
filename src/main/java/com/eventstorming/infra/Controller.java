@@ -84,7 +84,7 @@ public class {{namePascalCase}}Controller {
     {{/checkMethod}}
     {{^checkMethod controllerInfo.method}}
 
-    @RequestMapping(value = "/{{#aggregate}}{{namePlural}}{{/aggregate}}/{{#if controllerInfo.apiPath}}{{controllerInfo.apiPath}}{{/if}}", method = RequestMethod.{{#controllerInfo}}{{method}}{{/controllerInfo}}, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/{{#aggregate}}{{namePlural}}{{/aggregate}}{{#if controllerInfo.apiPath}}/{{controllerInfo.apiPath}}{{/if}}", method = RequestMethod.{{#controllerInfo}}{{method}}{{/controllerInfo}}, produces = "application/json;charset=UTF-8")
     public {{#aggregate}}{{namePascalCase}}{{/aggregate}} {{nameCamelCase}}(        
         @RequestBody {{namePascalCase}}Command {{nameCamelCase}}Command,
         HttpServletRequest request,
