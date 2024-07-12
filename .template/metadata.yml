@@ -4,5 +4,6 @@ imageUrl: https://github.com/msa-ez/template-spring-boot-egov/assets/123912988/6
 description: Framework that allows for the rapid and easy development of web applications in accordance with the e-Government standard framework format.
 depends: 
   - template-spring-boot
+  - spring-boot
 tags:
   - Backend, Spring-boot
